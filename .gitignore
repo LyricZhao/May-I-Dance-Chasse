@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io
 
+static/tickets/*
+
 ### OSX ###
 .DS_Store
 .AppleDouble

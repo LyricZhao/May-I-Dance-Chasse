@@ -35,7 +35,7 @@ def index(request):
                 if not ticket_filter.count():
                     ticket = Ticket(name=data['name'], pid=data['pid'], hash_value=hash_value)
                     ticket.save()
-                    # ticket.make()
+                    ticket.make()
                 return HttpResponseRedirect('/ticket/' + hash_value + '/')
             else:
                 error.append('请正确填写对应的信息！')
@@ -44,4 +44,5 @@ def index(request):
 
 def ticket(request, hash_value):
     title = u'追·Chassé | 电子门票'
+    ticket = Ticket.objects.get(hash_value=hash_value)
     return render(request, 'ticket.html', locals())
