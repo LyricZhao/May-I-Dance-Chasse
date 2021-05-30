@@ -1,14 +1,15 @@
 from django import forms
 from django.db import models
 
-from wand.image import Image
-from wand.drawing import Drawing
-from wand.color import Color
+from PIL import Image, ImageDraw, ImageFont
 
 from chasse.settings import BASE_DIR
 
 TICKET_SOURCE_FILE = BASE_DIR / 'static' / 'images' / 'ticket.png'
 TICKET_SAVE_PATH = BASE_DIR / 'static' / 'tickets'
+FONT_PATH = BASE_DIR / 'static' / 'fonts' / 'Libian.ttc'
+
+font = ImageFont.truetype(str(FONT_PATH), 55)
 
 class TicketForm(forms.Form):
     name = forms.CharField(max_length=32)
@@ -20,9 +21,10 @@ class Ticket(models.Model):
     hash_value = models.CharField(max_length=32, unique=True)
 
     def make(self):
-        print(str(TICKET_SOURCE_FILE))
-        with Image(filename=str(TICKET_SOURCE_FILE)) as ticket:
-            with Drawing() as draw:
-                draw.push()
-                draw(ticket)
-                ticket.save(filename=str(TICKET_SAVE_PATH / (self.hash_value + '.png')))
+        line = str(self.name) + ' / ' + str(self.pid)
+        ticket = Image.open(str(TICKET_SOURCE_FILE))
+        w, h = ticket.size
+        draw = ImageDraw.Draw(ticket)
+        lw, lh = draw.textsize(line, font=font)
+        draw.text(((w - lw) / 2, 780), line, fill='black', font=font)
+        ticket.save(str(TICKET_SAVE_PATH / (self.hash_value + '.png')), 'PNG')
