@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <style>
+   /*body{
+        background-image: url({% static "wallpaper/img/bgx.jpg" %});
+        background-repeat: repeat-y;
+        background-size: 100%;
+    }*/
+    .jumbotron{
+        background-color:rgba(0,0,0,0.25);
+        border-radius: 0 !important;
+        color: #fff;
+
+        background-image: url({% static "images/banner.jpg" %});
+        background-size: cover;
+        background-position:left top;
+        height: 100%;
+        position: relative
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <body>
+
+    <div  class="container" style="padding-left: 0;padding-right: 0;height: 200px; position: relative;">
+        <div class="jumbotron" style="">
+            {% block jumbotron %}
+
+                    <div style="position: absolute;bottom: 5%;left:0;right: 0;background-color:rgba(0,0,0,0.25);">
+
+                        <div class="center-block col-lg-8" style="float: none;clear: both;">
+                            {% if title %}<h3 id="title">{{ title }}</h3>{% endif %}
+                        </div>
+
+                        <div style="height: 10px;clear:both"></div>
+
+                    </div>
+            {% endblock %}
+        </div>
+	</div>
+
+    <br><br>
+
+    <div class="container" style="padding: 0;">
+        {% block error %}
+            {% if error %}
+                <p style="color: red;">
+                    Error{{ form.errors|pluralize }}:
+                </p>
+                {% for item in error %}
+                    <p style="color:red;">{{item}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+
+        {% block content %}
+        hello!
+        <br />
+        {% endblock %}
+
+
+
+
+
+    </div>
+
+{% block footer %}
+    <div class="modal-footer">
+        <p>&copy; 2021 清华大学学生艺术团国标队</p>
+    </div>
+
+{% endblock %}
+
+</body>
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    $(function() {
+        masonryNode = $('#masonry');
+        masonryNode.imagesLoaded(function(){
+            masonryNode.masonry({
+                itemSelector: '.list_item',
+                isFitWidth: true
+            });
+        });
+
+        $('.carousel').carousel({interval:3000})
+    });
+
+    $("#sourcebutton").click(function(){
+        window.location.href = "/ticket/";
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "frame.html" %}
+{% load static %}
+
+{% block content %}
+<div class="center-block" style="float: none;padding:10px">
+	<p class="indent">清华大学学生艺术团国标队「追·Chassé」专场电子票私人定制～ 在下方输入你的姓名和学号，领取属于你的个性门票吧！</p>
+
+    <br>
+
+    <h3>剩余票数：{{ tleft }}</h3>
+
+    {% if tready %}
+
+    <form action="" method="post" >
+        {% csrf_token %}
+        <h4>姓名</h4>
+        {{ form.name.errors }}
+        {{ form.name }}
+        <h4>学号</h4>
+        {{ form.schid.errors }}
+        {{ form.schid }}
+
+        <div style="height: 15px"></div>
+
+        <input type="submit"  class="btn btn-large btn-default col-xs-4 col-lg-2 center-block" style="float:none" value="提交" />
+    </form>
+
+    {% else %}
+
+        <h3>票已经没有啦！</h3>
+        <p>感谢您对专场节目的关注！</p>
+        <p>请关注清华国标队获取更多信息！</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

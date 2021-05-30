@@ -1,0 +1,19 @@
+{% extends "frame.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="center-block col-lg-12" style="float: none;clear: both;">
+        <p><i class="fa fa-download"></i>&nbsp;长按图片下载</p>
+        <img src="{{ wallpaper.img_url }}" class="source_thumb screen_like">
+        <br><br><br>
+    </div>
+
+    <br>
+
+    <div class="center-block col-lg-8" style="float: none;clear: both;">
+        <br><br>
+        <p>请长按图像下载电子票，演出开始前凭学生证与电子票入场。</p>
+        <p>分享到朋友圈，以便随时查找此电子票。</p>
+        <br><br>
+    </div>
+{% endblock %}
