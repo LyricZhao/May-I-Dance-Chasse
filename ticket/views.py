@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import logging
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -8,6 +9,8 @@ from django.http import HttpResponseRedirect
 from .models import Ticket, TicketForm
 
 MAX_TICKETS = 1000
+
+logger = logging.getLogger('django')
 
 def ticket_hash(name, pid):
     hash_value = hash(name + '/ticket/' + pid)
@@ -33,6 +36,7 @@ def index(request):
                 hash_value = ticket_hash(data['name'], data['pid'])
                 ticket_filter = Ticket.objects.filter(hash_value=hash_value)
                 if not ticket_filter.count():
+                    logger.info('Generating ticket for ({}, {})'.format(data['name'], data['pid']))
                     ticket = Ticket(name=data['name'], pid=data['pid'], hash_value=hash_value)
                     ticket.save()
                     ticket.make()

@@ -9,11 +9,11 @@ TICKET_SOURCE_FILE = BASE_DIR / 'static' / 'images' / 'ticket.png'
 TICKET_SAVE_PATH = BASE_DIR / 'static' / 'tickets'
 FONT_PATH = BASE_DIR / 'static' / 'fonts' / 'Libian.ttc'
 
-font = ImageFont.truetype(str(FONT_PATH), 55)
+font = ImageFont.truetype(str(FONT_PATH), 45)
 
 class TicketForm(forms.Form):
-    name = forms.CharField(max_length=32)
-    pid = forms.CharField(max_length=32)
+    name = forms.CharField(max_length=6)
+    pid = forms.CharField(max_length=18)
 
 class Ticket(models.Model):
     name = models.CharField(max_length=32)
