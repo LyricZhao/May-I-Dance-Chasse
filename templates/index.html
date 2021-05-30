@@ -7,9 +7,9 @@
 
     <br>
 
-    <h3>剩余票数：{{ tleft }}</h3>
+    <h3>剩余票数：{{ ticket_left }}</h3>
 
-    {% if tready %}
+    {% if ticket_ready %}
 
     <form action="" method="post" >
         {% csrf_token %}
