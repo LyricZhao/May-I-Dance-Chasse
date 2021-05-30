@@ -2,8 +2,10 @@ from django import forms
 from django.db import models
 
 class TicketForm(forms.Form):
-    name = forms.CharField(max_length=32, label='姓名')
-    stu_id = forms.IntegerField(max_value=9999999999, min_value=1000000000, label="学号")
+    name = forms.CharField(max_length=32)
+    pid = forms.CharField(max_length=32)
 
 class Ticket(models.Model):
-    stu_id = models.IntegerField(blank=True, default=0)
+    name = models.CharField(max_length=32)
+    pid = models.CharField(max_length=32)
+    hash_value = models.CharField(max_length=32, unique=True)

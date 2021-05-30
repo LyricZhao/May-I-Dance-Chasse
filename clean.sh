@@ -1,3 +1,8 @@
+rm -rf db.sqlite3
+rm -rf __pycache__
+rm -rf db.sqlite3-journal
+rm -rf chasse/__pycache__
+rm -rf ticket/__pycache__
 python3 manage.py flush
-rm -rf db.sqlite3 __pycache__
+python3 manage.py makemigrations
 python3 manage.py migrate --run-syncdb

@@ -20,5 +20,5 @@ from ticket import views
 
 urlpatterns = [
     path('', views.index),
-    path('ticket/', views.ticket)
+    path(r'ticket/<str:hash_value>/', views.ticket)
 ]
