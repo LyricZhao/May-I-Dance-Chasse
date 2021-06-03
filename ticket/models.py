@@ -7,9 +7,9 @@ from chasse.settings import BASE_DIR
 
 TICKET_SOURCE_FILE = BASE_DIR / 'static' / 'images' / 'ticket.png'
 TICKET_SAVE_PATH = BASE_DIR / 'static' / 'tickets'
-FONT_PATH = BASE_DIR / 'static' / 'fonts' / 'Libian.ttc'
+FONT_PATH = BASE_DIR / 'static' / 'fonts' / 'FZXinZYHJW_R.ttf'
 
-font = ImageFont.truetype(str(FONT_PATH), 45)
+font = ImageFont.truetype(str(FONT_PATH), 26)
 
 class TicketForm(forms.Form):
     name = forms.CharField(max_length=6)
@@ -26,5 +26,5 @@ class Ticket(models.Model):
         w, h = ticket.size
         draw = ImageDraw.Draw(ticket)
         lw, lh = draw.textsize(line, font=font)
-        draw.text(((w - lw) / 2, 780), line, fill='black', font=font)
+        draw.text((520, 129), line, fill='white', font=font)
         ticket.save(str(TICKET_SAVE_PATH / (self.hash_value + '.png')), 'PNG')
